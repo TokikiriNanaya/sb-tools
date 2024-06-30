@@ -238,6 +238,7 @@ def f5():
     gui.press('f5')
 
 
-def scroll(val):
+def scroll(clicks, x=None, y=None):
     print("鼠标滚轮")
-    gui.scroll(val)
+    gui.moveTo(x, y)
+    gui.scroll(clicks)
