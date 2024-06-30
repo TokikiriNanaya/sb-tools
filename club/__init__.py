@@ -20,6 +20,12 @@ time_out_count = 15
 
 common_delay = 2
 
+# 刷新游戏页面
+def refresh_game(hwnd):
+    kry.f5()
+    kry.delay(3)
+    if kry.find_img_and_click_ran(hwnd, "../resource/img-club/location.png"):
+        kry.delay(common_delay)
 
 def use_tili(hwnd):
     if kry.find_img_and_click_ran(hwnd, "../resource/img-club/location.png"):
@@ -38,6 +44,9 @@ def loop_main():
         return
     kry.set_top(hwnd)
 
+    # 关闭公告弹窗
+    if kry.find_img_and_click_ran(hwnd, "../resource/img-club/notice_close.png"):
+        kry.delay(common_delay)
     if kry.find_img_and_click_ran(hwnd, "../resource/img-club/location.png"):
         kry.delay(common_delay)
     if kry.find_img_and_click_ran(hwnd, "../resource/img-club/tree.png"):
@@ -48,7 +57,7 @@ def loop_main():
         kry.delay(common_delay)
     if kry.find_img_and_click_ran(hwnd, "../resource/img-club/confirm.png"):
         # 判断体力是否不足
-        if kry.find_img_and_click_ran(hwnd, "../resource/img-club/not_enough_tili.png"):
+        if kry.find_img_is_exist(hwnd, "../resource/img-club/not_enough_tili.png"):
             # 体力不足 使用体力
             use_tili(hwnd)
         kry.delay(common_delay)

@@ -98,6 +98,13 @@ def find_img(hwnd, find_img_path, source_img_path=cap_path, similar=default_simi
     return -1, -1
 
 
+def find_img_is_exist(hwnd, find_img_path, source_img_path=cap_path, similar=default_similar):
+    x, y = find_img(hwnd, find_img_path, source_img_path=cap_path, similar=default_similar)
+    if x >= 0 and y >= 0:
+        return True
+    return False
+
+
 def find_img_and_click_ran(hwnd, find_img_path, source_img_path=cap_path, similar=default_similar):
     """
     找图 如果找到则在该图范围内点击一次
@@ -224,3 +231,13 @@ def alt_f4():
     gui.keyDown('alt')
     gui.press('f4')
     gui.keyUp('alt')
+
+
+def f5():
+    print("模拟按下 F5 键")
+    gui.press('f5')
+
+
+def scroll(val):
+    print("鼠标滚轮")
+    gui.scroll(val)
