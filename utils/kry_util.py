@@ -11,6 +11,7 @@ import cv2
 
 import pyautogui as gui
 import os
+import subprocess
 
 # import win32con
 import win32gui
@@ -139,7 +140,8 @@ def find_img_and_click_ran(hwnd, find_img_path, source_img_path=cap_path, simila
 
 def run(path):
     print("启动：", path)
-    os.system(path)
+    # os.system(path)
+    subprocess.Popen(path)
     print("启动完成")
 
 

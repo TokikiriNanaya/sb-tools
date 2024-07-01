@@ -18,7 +18,7 @@ game_path = "C:/JumpGame/300Hero/"
 # 截图路径
 cap_path = "../screenshot.png"
 # 超时次数
-time_out_count = 15
+time_out_count = 20
 
 # 已获取数量
 gong_xian = 0
@@ -40,7 +40,6 @@ def loop_main():
 
     # 获取游戏窗口
     hwnd = None
-    started = False
     while hwnd is None:
         hwnd = kry.find_window(window_title)
         kry.delay(1)
@@ -48,9 +47,8 @@ def loop_main():
             count = count - 1
             if count <= 0:
                 return
-            if not started:
-                kry.run(game_path + "launcher.exe")
-                started = True
+            kry.run(game_path + "launcher.exe")
+            kry.delay(20)
         else:
             kry.set_top(hwnd)
             print(hwnd)
@@ -69,14 +67,14 @@ def loop_main():
             kry.delay(1)
             # 选区-相对坐标
             kry.click(start_x + 39, start_y - 322)
-            kry.delay(0.5)
+            kry.delay(0.3)
             kry.click(start_x - 820, start_y - 211)
-            kry.delay(0.5)
+            kry.delay(0.3)
             # 选区-相对坐标
             kry.click(start_x + 39, start_y - 322)
-            kry.delay(0.5)
+            kry.delay(0.3)
             kry.click(start_x - 820, start_y - 211)
-            kry.delay(0.5)
+            kry.delay(0.3)
 
             kry.click(start_x, start_y)
             next_position = "进入世界服"
@@ -134,7 +132,7 @@ def loop_main():
                 kry.click(play_x - 541, play_y + 14)
                 next_position = "贡献币"
                 count = time_out_count
-        kry.delay(0.3)
+        kry.delay(1)
 
     while next_position == "贡献币":
         count = count - 1
@@ -211,8 +209,12 @@ if __name__ == '__main__':
     else:
         # 正常运行
         while True:
-            # loop_main()
-            run_with_timeout(120)
+            try:
+                loop_main()
+            except Exception as e:
+                print(f"发生异常了！【{e}】，不过我不在乎，给我继续跑！")
+                continue
+            # run_with_timeout(120)
             elapsed_time = time.time() - start_time  # 计算已经过去的时间
             print(
                 f"程序已运行时间：{elapsed_time}秒，贡献总量{gong_xian}，当前速率{gong_xian / elapsed_time * 60 * 60}贡献/h")
