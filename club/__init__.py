@@ -56,14 +56,20 @@ def refresh_game():
     refresh_game(hwnd)
 
 
-def use_tili(hwnd):
+def use_tili(hwnd, times):
     if kry.find_img_and_click_ran(hwnd, "../resource/img-club/location.png"):
         kry.delay(common_delay)
         if kry.find_img_and_click_ran(hwnd, "../resource/img-club/add_tili.png"):
             kry.delay(common_delay)
-            if kry.find_img_and_click_ran(hwnd, "../resource/img-club/potato.png"):
-                kry.delay(common_delay)
-            if kry.find_img_and_click_ran(hwnd, "../resource/img-club/confirm_use_tili.png"):
+            # if kry.find_img_and_click_ran(hwnd, "../resource/img-club/potato.png"):
+            #     kry.delay(common_delay)
+            # if kry.find_img_and_click_ran(hwnd, "../resource/img-club/confirm_use_tili.png"):
+            #     kry.delay(common_delay)
+            x, y = kry.find_img(hwnd, "../resource/img-club/confirm_use_tili.png")
+            if x >= 0 and y >= 0:
+                for i in range(times):
+                    kry.click(x, y)
+                    kry.delay(0.1)
                 kry.delay(common_delay)
 
 
@@ -88,7 +94,7 @@ def loop_main():
         # 判断体力是否不足
         if kry.find_img_is_exist(hwnd, "../resource/img-club/not_enough_tili.png"):
             # 体力不足 使用体力
-            use_tili(hwnd)
+            use_tili(hwnd, 4)
         kry.delay(common_delay)
 
 
